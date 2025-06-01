@@ -97,3 +97,5 @@ C:\Users\venge\Desktop\demka\demka\demka\bin\Debug\tr\Microsoft.Data.SqlClient.r
 C:\Users\venge\Desktop\demka\demka\demka\bin\Debug\zh-Hans\Microsoft.Data.SqlClient.resources.dll
 C:\Users\venge\Desktop\demka\demka\demka\bin\Debug\zh-Hant\Microsoft.Data.SqlClient.resources.dll
 C:\Users\venge\Desktop\demka\demka\demka\obj\Debug\demka.csproj.CopyComplete
+C:\Users\venge\Desktop\demka\demka\demka\obj\Debug\demka.csproj.SuggestedBindingRedirects.cache
+C:\Users\venge\Desktop\demka\demka\demka\obj\Debug\demka.exe.config

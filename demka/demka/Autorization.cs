@@ -41,7 +41,7 @@ namespace demka
                 return;
             }
 
-            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DemoConnection"].ConnectionString;
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
