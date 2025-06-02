@@ -20,6 +20,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
         SqlConnection conn = new SqlConnection(@"Data Source=ALEX\SQLEXPRESS; Initial Catalog=DOMOY; Integrated Security=true; TrustServerCertificate=true");
 
         private void Form2_Load(object sender, EventArgs e)

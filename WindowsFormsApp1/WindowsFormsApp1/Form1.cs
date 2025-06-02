@@ -13,12 +13,15 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        public bool LoginSuccessful = false;
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+
+        public void button1_Click(object sender, EventArgs e)
         {
             string login = textBox1.Text;
             string password = textBox2.Text;
@@ -52,7 +55,7 @@ namespace WindowsFormsApp1
 
                             else if (role == "Преподаватель")
                             {
-                                Form2 prepod = new Form2();
+                                Form4 prepod = new Form4();
                                 prepod.orderId = userId;
                                 prepod.Show();
                             }
@@ -60,14 +63,21 @@ namespace WindowsFormsApp1
                         textBox1.Text = "";
                         textBox2.Text = "";
                         this.Hide();
+
+                        LoginSuccessful = true;
+
                     }
                     else
                     {
+                        LoginSuccessful = false;
+
                         MessageBox.Show("НЕВЕРНЫЙ ЛОГИН ИЛИ ПАРОЛЬ");
                         return;
                     }
+
                     reader.Close();
                 }
+
                 catch(Exception ex)
                 {
                     MessageBox.Show("ОШИБКА" + ex.Message);
