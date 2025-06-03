@@ -119,6 +119,8 @@ namespace WindowsFormsApp1
             dataGridView1.DataSource = t;
         }
 
+        // ДОБАВЛЕНИЕ ЧЕРЕЗ ТЕКСТБОКС
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             SqlConnection con = new SqlConnection(@"Data Source=ALEX\SQLEXPRESS; Initial Catalog=DOMOY; Integrated Security=True; TrustServerCertificate=True");
@@ -140,6 +142,8 @@ namespace WindowsFormsApp1
             textBox1.Text = "";
             textBox2.Text = "";
         }
+
+        // ОБНОВЛЕНИЕ ЧЕРЕЗ ТЕКСТБОКС
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
@@ -164,6 +168,8 @@ namespace WindowsFormsApp1
             textBox2.Text = "";
         }
 
+
+        // УДАЛЕНИЕ ЧЕРЕЗ ТЕКСТБОКС
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             SqlConnection con = new SqlConnection(@"Data Source=ALEX\SQLEXPRESS; Initial Catalog=DOMOY; Integrated Security=True; TrustServerCertificate=True");
@@ -184,8 +190,6 @@ namespace WindowsFormsApp1
             textBox1.Text = "";
             textBox2.Text = "";
         }
-
-
 
 
         private void button3_Click(object sender, EventArgs e)
