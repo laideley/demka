@@ -96,45 +96,6 @@ namespace WindowsFormsApp1
             dataGridView1.DataSource = t;
         }
 
-        // Сохранение изменений
-        private void button3_Click(object sender, EventArgs e)
-        {
-            int studentId = (int)comboBox2.SelectedValue;
-            int disciplineId = (int)comboBox1.SelectedValue;
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (row.IsNewRow) continue;
-
-                object cell = row.Cells[1].Value; // Оценка
-                int? grade = null;
-
-                if (cell != null && int.TryParse(cell.ToString(), out int result))
-                    grade = result;
-
-                if (grade == null)
-                {
-                    SqlCommand del = new SqlCommand("DELETE FROM Оценки WHERE Номер_студента = @s AND Вид_дисциплины = @d", conn);
-                    del.Parameters.AddWithValue("@s", studentId);
-                    del.Parameters.AddWithValue("@d", disciplineId);
-                    del.ExecuteNonQuery();
-                }
-                else
-                {
-                    SqlCommand up = new SqlCommand(@"
-                    IF EXISTS (SELECT 1 FROM Оценки WHERE Номер_студента=@s AND Вид_дисциплины=@d)
-                        UPDATE Оценки SET Оценка=@o WHERE Номер_студента=@s AND Вид_дисциплины=@d
-                    ELSE
-                        INSERT INTO Оценки (Номер_студента, Вид_дисциплины, Оценка) VALUES (@s, @d, @o)", conn);
-                    up.Parameters.AddWithValue("@s", studentId);
-                    up.Parameters.AddWithValue("@d", disciplineId);
-                    up.Parameters.AddWithValue("@o", grade);
-                    up.ExecuteNonQuery();
-                }
-            }
-            MessageBox.Show("Оценки обновлены.");
-        }
-
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
@@ -157,6 +118,82 @@ namespace WindowsFormsApp1
             da.Fill(t);
             dataGridView1.DataSource = t;
         }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=ALEX\SQLEXPRESS; Initial Catalog=DOMOY; Integrated Security=True; TrustServerCertificate=True");
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand(@"
+        INSERT INTO Оценки (Номер_студента, Вид_дисциплины, Оценка, Дата_оценки) 
+        VALUES (@studentId, @disciplineId, @grade, GETDATE())", con);
+
+            cmd.Parameters.AddWithValue("@studentId", Convert.ToInt32(textBox1.Text));
+            cmd.Parameters.AddWithValue("@disciplineId", Convert.ToInt32(comboBox1.SelectedValue));
+            cmd.Parameters.AddWithValue("@grade", Convert.ToInt32(textBox2.Text));
+
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+            MessageBox.Show("Оценка добавлена.");
+
+            textBox1.Text = "";
+            textBox2.Text = "";
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=ALEX\SQLEXPRESS; Initial Catalog=DOMOY; Integrated Security=True; TrustServerCertificate=True");
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand(@"
+        UPDATE Оценки 
+        SET Оценка = @grade, Дата_оценки = GETDATE()
+        WHERE Номер_студента = @studentId AND Вид_дисциплины = @disciplineId", con);
+
+            cmd.Parameters.AddWithValue("@studentId", Convert.ToInt32(textBox1.Text));
+            cmd.Parameters.AddWithValue("@disciplineId", Convert.ToInt32(comboBox1.SelectedValue));
+            cmd.Parameters.AddWithValue("@grade", Convert.ToInt32(textBox2.Text));
+
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+            MessageBox.Show("Оценка Обновлена.");
+
+            textBox1.Text = "";
+            textBox2.Text = "";
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=ALEX\SQLEXPRESS; Initial Catalog=DOMOY; Integrated Security=True; TrustServerCertificate=True");
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand(@"
+        DELETE FROM Оценки 
+        WHERE Номер_студента = @studentId AND Вид_дисциплины = @disciplineId", con);
+
+            cmd.Parameters.AddWithValue("@studentId", Convert.ToInt32(textBox1.Text));
+            cmd.Parameters.AddWithValue("@disciplineId", Convert.ToInt32(comboBox1.SelectedValue));
+
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+            MessageBox.Show("Оценка Удалена.");
+
+            textBox1.Text = "";
+            textBox2.Text = "";
+        }
+
+
+
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+     
     }
 }
 

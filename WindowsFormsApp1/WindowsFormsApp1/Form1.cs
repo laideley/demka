@@ -55,7 +55,7 @@ namespace WindowsFormsApp1
 
                             else if (role == "Преподаватель")
                             {
-                                Form4 prepod = new Form4();
+                                Form2 prepod = new Form2();
                                 prepod.orderId = userId;
                                 prepod.Show();
                             }
