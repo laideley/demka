@@ -71,6 +71,7 @@ namespace WindowsFormsApp1
             FROM Оценки o
             JOIN Дисциплина d ON o.Вид_дисциплины = d.Код_дисциплины
             WHERE o.Номер_студента = @id", conn);
+
             da.SelectCommand.Parameters.AddWithValue("@id", studentId);
 
             DataTable t = new DataTable();
